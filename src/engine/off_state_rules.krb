@@ -1,0 +1,53 @@
+init_rule
+	foreach
+		off_state_questions.beep_question($ans)
+	assert
+		off_state_facts.beep_answer($ans)
+		
+ram_yes_rule
+	foreach
+		off_state_facts.beep_answer(True)
+	assert
+		python import wx
+		python wx.MessageBox("Check the memory, you may have purchased the wrong memory, installed it incorrectly, or damaged the memory module by handling it improperly.", 'Solution')
+
+ram_no_rule
+	foreach
+		off_state_facts.beep_answer(False)
+	assert
+		off_state_facts.problem_from(speaker)
+
+speaker_rule
+	foreach
+		off_state_facts.problem_from(speaker)
+		off_state_questions.speaker_question($ans)
+	assert
+		off_state_facts.speaker_answer($ans)
+
+speaker_yes_rule
+	foreach
+		off_state_facts.speaker_answer(True)
+		off_state_questions.monitor_check_question($ans)
+	assert
+		off_state_facts.monitor_answer($ans)
+
+speaker_no_rule
+	foreach
+		off_state_facts.speaker_answer(False)
+	assert
+		python import wx
+		python wx.MessageBox("Please make sure the speaker is there if not please install it in your case and rerun the program", 'Solution')
+
+monitor_yes_rule
+	foreach
+		off_state_facts.monitor_answer(True)
+	assert
+		python import wx
+		python wx.MessageBox("Please check your monitor cable if it is connected to the case at the rear.", 'Solution')
+
+monitor_no_rule
+	foreach
+		off_state_facts.monitor_answer(False)
+	assert
+		python import wx
+		python wx.MessageBox("Please switched on and see the results.", 'Solution')

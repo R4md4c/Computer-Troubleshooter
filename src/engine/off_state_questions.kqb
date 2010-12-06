@@ -1,0 +1,18 @@
+beep_question($ans)
+	Do you hear a long beep or sequence of beeps at startup (when you press switch-on button) ?
+	---
+	$ans = yn
+
+speaker_question($ans)
+	Are you sure that you have a speaker in your computer case ?
+	---
+	$ans = yn
+
+monitor_check_question($ans)
+	Is your monitor turned on ?
+	---
+	$ans = yn
+
+
+
+
