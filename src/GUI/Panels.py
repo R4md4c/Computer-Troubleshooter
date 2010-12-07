@@ -8,6 +8,8 @@ to ask the questions so that the question & answers feat begins"""
 
 from GUI.GenericPanel import GenericPanel
 import wx
+import sqlite3
+import sys
 
 class StatePanel(GenericPanel):
     """ A panel for asking for the computer state if its switched on or switched off"""
@@ -29,3 +31,32 @@ class ProblemPanel(GenericPanel):
     
     def OnSelect(self, event):
         self.stateValue = self.comboBox.GetValue()
+        
+class Log(GenericPanel):
+    def __init__(self,parent,id):
+        wx.Panel.__init__(self,parent,id)   
+        self.logData = self.logConnect("log.sqlite", "log")      
+        self.table = wx.ListCtrl(parent,-1,style=wx.LC_REPORT,size = (800,600))
+        self.table.InsertColumn(0, '#', width=200)
+        self.table.InsertColumn(1, 'Problem', width=200)
+        self.table.InsertColumn(2, 'Solution', width=200)
+        self.table.InsertColumn(3, 'Date', wx.LIST_FORMAT_LEFT, 200)
+        self.addData(self.logData)
+
+
+ #------------------ Connect to SQLite database -------------       
+    def logConnect(self,databaseName,tableName):
+        connection = sqlite3.connect(databaseName)
+        cursor = connection.cursor()
+        sql = "select * from "+tableName
+        cursor.execute(sql)
+        return cursor.fetchall()
+
+
+#------------------- Put log data on the table --------------
+    def addData(self,list):
+       for i in list:
+            index = self.table.InsertStringItem(sys.maxint, str(i[0]))
+            self.table.SetStringItem(index, 1, i[1])
+            self.table.SetStringItem(index, 2, i[2])
+            self.table.SetStringItem(index, 3, i[3])

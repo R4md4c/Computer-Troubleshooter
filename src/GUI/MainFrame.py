@@ -7,6 +7,7 @@ Created on Nov 17, 2010
 import wx
 from GUI.Panels import StatePanel
 from GUI.Panels import ProblemPanel
+from GUI.Panels import Log
 from engine import driver
 
 class MainFrame(wx.Frame):
@@ -18,8 +19,10 @@ class MainFrame(wx.Frame):
         self.menuBar = wx.MenuBar()
         self.fileMenu = wx.Menu()
         self.newItem = wx.MenuItem(self.fileMenu, wx.ID_NEW, '&New\tCtrl+N')
+        self.logItem = wx.MenuItem(self.fileMenu, wx.ID_OPEN, '&Log\tCtrl+L')
         self.quitItem = wx.MenuItem(self.fileMenu, wx.ID_EXIT, '&Quit\tCtrl+Q')
         self.fileMenu.AppendItem(self.newItem)
+        self.fileMenu.AppendItem(self.logItem)
         self.fileMenu.AppendItem(self.quitItem)
         self.menuBar.Append(self.fileMenu, '&File')
         self.SetMenuBar(self.menuBar)
@@ -27,6 +30,7 @@ class MainFrame(wx.Frame):
         self.stateValue = None
         
         self.Bind(wx.EVT_MENU, self.OnQuit, id = wx.ID_EXIT)
+        self.Bind(wx.EVT_MENU, self.onLog, id = wx.ID_OPEN)
         self.Bind(wx.EVT_MENU, self.OnNew, id = wx.ID_NEW)
         
         self.statePanel = StatePanel(self, _id)
@@ -37,8 +41,16 @@ class MainFrame(wx.Frame):
          
     def OnQuit(self, event):
         self.Close()
-    
+        
+    def onLog(self, event):
+        frame = wx.Frame(None,-1,size = (800,600))
+        log = Log(frame,-1)
+        frame.Show()
+        
+        
     def OnNew(self, event):
+       
+    
         driver.reset()
         self.stateValue =  None
         self.statePanel.comboBox.SetValue('')
