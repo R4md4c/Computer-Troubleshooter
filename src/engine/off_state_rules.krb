@@ -8,8 +8,8 @@ ram_yes_rule
 	foreach
 		off_state_facts.beep_answer(True)
 	assert
-		python import wx
-		python wx.MessageBox("Check the memory, you may have purchased the wrong memory, installed it incorrectly, or damaged the memory module by handling it improperly.", 'Solution')
+		python from GUI.BitmapDialog import BitmapDialog
+		python BitmapDialog("Check the memory, you may have purchased the wrong memory, installed it incorrectly, or damaged the memory module by handling it improperly.", 'images/ram.jpg').ShowModal()
 
 ram_no_rule
 	foreach
@@ -35,19 +35,34 @@ speaker_no_rule
 	foreach
 		off_state_facts.speaker_answer(False)
 	assert
-		python import wx
-		python wx.MessageBox("Please make sure the speaker is there if not please install it in your case and rerun the program", 'Solution')
+		python from GUI.BitmapDialog import BitmapDialog
+		python BitmapDialog("Please make sure the speaker is there if not please install it in your case and rerun the program", 'images/speaker.jpg').ShowModal()
 
 monitor_yes_rule
 	foreach
 		off_state_facts.monitor_answer(True)
 	assert
-		python import wx
-		python wx.MessageBox("Please check your monitor cable if it is connected to the case at the rear.", 'Solution')
+		python from GUI.BitmapDialog import BitmapDialog
+		python BitmapDialog("Please check your monitor cable if it is connected to the case at the rear.", 'images/monitor_cable.jpg').ShowModal()
 
 monitor_no_rule
 	foreach
 		off_state_facts.monitor_answer(False)
 	assert
+		python from GUI.BitmapDialog import BitmapDialog
+		python BitmapDialog("Please switch it on and see the results.", 'images/monitor.jpg').ShowModal()
+		
+
+is_problem_solved_question
+	foreach
+		off_state_questions.is_problem_solved_question($ans)
+	assert
+		off_state_facts.problem_solved($ans)
+
+if_problem_solved_yes_rule
+	foreach
+		off_state_facts.problem_solved(True)
+	assert
 		python import wx
-		python wx.MessageBox("Please switched on and see the results.", 'Solution')
+		python wx.MessageBox("Thank you for your cooperation", 'Solution')
+		

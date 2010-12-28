@@ -22,7 +22,7 @@ class ProblemPanel(GenericPanel):
     """ If the computer is switched on then that panel appears and asks the
     user what he thinks the problem is from"""
     def __init__(self, parent, _id):
-        GenericPanel.__init__(self, parent, _id, ('Screen', 'RAM', 'CPU', 'Network'))
+        GenericPanel.__init__(self, parent, _id, ('Screen', 'CPU', 'Network'))
         self.staticText.SetLabel('What do you think the problem is from ?')
         self.Layout()
         self.stateValue = None

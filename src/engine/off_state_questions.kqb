@@ -12,6 +12,7 @@ monitor_check_question($ans)
 	Is your monitor turned on ?
 	---
 	$ans = yn
+
 is_problem_solved_question($ans)
 	Is the problem solved ?
 	---
