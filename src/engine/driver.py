@@ -14,5 +14,8 @@ def run():
     engine.ask_module = ask_wx
     engine.activate('off_state_rules')
 
+def run_on_state_screen():
+    engine.ask_module = ask_wx
+    engine.activate('on_state_rules_screen')
 def reset():
     engine.reset()

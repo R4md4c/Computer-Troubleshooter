@@ -1,0 +1,6 @@
+init_rule
+	foreach
+		on_state_fact_screen.problem(from, screen)
+	assert
+		python print "Hello Screen"
+ 

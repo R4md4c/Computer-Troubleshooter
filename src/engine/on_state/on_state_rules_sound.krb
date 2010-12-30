@@ -1,0 +1,5 @@
+init_rule
+	foreach
+		on_state_fact_sound.problem(network)
+	assert
+		python print "Hello"

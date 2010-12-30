@@ -161,7 +161,7 @@ def if_problem_solved_yes_rule(rule, context = None, index = None):
       as gen_0:
       for dummy in gen_0:
         import wx
-        wx.MessageBox("Thanks for your cooperation", 'Solution')
+        wx.MessageBox("Thank you for your cooperation", 'Solution')
         rule.rule_base.num_fc_rules_triggered += 1
   finally:
     context.done()

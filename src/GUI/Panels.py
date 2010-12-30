@@ -10,6 +10,7 @@ from GUI.GenericPanel import GenericPanel
 import wx
 import sqlite3
 import sys
+from engine import driver
 
 class StatePanel(GenericPanel):
     """ A panel for asking for the computer state if its switched on or switched off"""
@@ -22,7 +23,7 @@ class ProblemPanel(GenericPanel):
     """ If the computer is switched on then that panel appears and asks the
     user what he thinks the problem is from"""
     def __init__(self, parent, _id):
-        GenericPanel.__init__(self, parent, _id, ('Screen', 'CPU', 'Network'))
+        GenericPanel.__init__(self, parent, _id, ('Screen', 'Sound', 'Network'))
         self.staticText.SetLabel('What do you think the problem is from ?')
         self.Layout()
         self.stateValue = None
@@ -31,6 +32,9 @@ class ProblemPanel(GenericPanel):
     
     def OnSelect(self, event):
         self.stateValue = self.comboBox.GetValue()
+        if self.stateValue == 'Screen':
+            driver.engine.reset()
+            driver.run_on_state_screen()
         
 class Log(GenericPanel):
     def __init__(self,parent,id):

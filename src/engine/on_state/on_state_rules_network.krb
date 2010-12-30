@@ -1,0 +1,5 @@
+init_rule
+	foreach
+		on_state_fact_network.problem(network)
+	assert
+		python print "Hello"
